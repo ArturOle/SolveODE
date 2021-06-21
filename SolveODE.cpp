@@ -3,9 +3,8 @@
 ODE::ODE(std::vector<double> parameters_in, double h_in)
 {
     this->parameters = parameters_in;
-    this->table[0] = {0, parameters[3], 0, 0};
+    this->table.push_back({0, parameters[3], 0, 0});
     this->h = h_in;
-    function(0);
 }
 
 std::vector<double> ODE::solve_euler()
