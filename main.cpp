@@ -10,17 +10,17 @@ double function2( double x, double y ){
 
 int main()
 {
-	double h = 0.2;
-	ODE equation( function1, 1.9, 9, h );
-	// std::vector<double> parameters = {-5.8, 4.7, -0.9, 1.9, 9};
-	// // std::vector<double> parameters = {-5.8, 4.7, -0.9, 1, 3};
+	std::vector<double> steps = {0.01, 0.1, 0.2};
+	for( auto& h: steps ) {
+		std::cout << "### Current step: " << h << " ###\n";
+		ODE equation( function1, 1.9, 9, h );
 
-	// ODE equation(parameters, 0.2);
-	std::cout << "Euler Method\n\nx; y; delta y;\n";
-	equation.solve_euler();
-	std::cout << "\n---------------------\n";
-	std::cout << "Runge-Kutta Method\n\nx; y; delta y;\n";
-	equation.solve_runge_kutta();
-	std::cout << "\n---------------------\n";
+		std::cout << "Euler Method\n\n";
+		equation.solve_euler();
+		std::cout << "\n---------------------\n";
 
+		std::cout << "Runge-Kutta Method\n\n";
+		equation.solve_runge_kutta();
+		std::cout << "\n---------------------\n";
+	}
 }

@@ -22,10 +22,15 @@ ODE::ODE(
 
 void ODE::solve_euler()
 {
+	std::fstream file;
+	std::string filename = "euler_" + std::to_string(h) + ".csv";
+	file.open(filename.c_str(), std::ios::out);
 	int i = 0;
 	double x;
 
-	for(x = 0; x <= upper_bound; x+=h)
+	file << "x;y;delta y;\n";
+
+	for(x = 0; x <= upper_bound; x += h)
 	{
 		table.push_back({0, 0, 0});
 		table[i][0] = x;
@@ -37,17 +42,23 @@ void ODE::solve_euler()
 		table[i][2] = h * (*function)(table[i][0], table[i][1]);
 
 		for (int j = 0; j < table[i].size(); j++)
-			std::cout << table[i][j] << ";"; 
+			file << table[i][j] << ";"; 
 		
 		i++;
-		std::cout << std::endl;
+		file << std::endl;
 	}
+	file.close();
 }
 
 void ODE::solve_runge_kutta()
 {
+	std::fstream file;
+	std::string filename = "runge-kutta_" + std::to_string(h) + ".csv";
+	file.open(filename.c_str(), std::ios::out);
 	int i = 0;
 	double x;
+
+	file << "x;y;delta y;\n";
 	
 	for(x = 0.0; x <= upper_bound; x += h)
 	{
@@ -63,11 +74,12 @@ void ODE::solve_runge_kutta()
 		table[i][2] = rk_delta_y(i); 
 
 		for (int j = 0; j < table[i].size(); j++)
-			std::cout << table[i][j] << ";"; 
+			file << table[i][j] << ";"; 
 
 		i++;
-		std::cout << std::endl;
+		file << std::endl;
 	}
+	file.close();
 }
 
 double ODE::rk_delta_y(int i)
