@@ -14,6 +14,8 @@ public:
 
     std::vector<double> solve_euler();
     std::vector<double> solve_runge_kutta();
+    double rk_delta_y(int i);
     double function(int i);
+    double rk_function(double x, double y);
 
 };
