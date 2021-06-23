@@ -11,10 +11,10 @@ Class ODE introduces two ways of calculating f(x) values on a set interval:
 
 It returns a `.csv` file with `;` delimiter, containing columns:
 
-|  x   |  y   |  Δy   |
-| ---- | ---- | ----- |
-| x~0~ | y~0~ | Δy~0~ |
-| x~1~ | y~1~ | Δy~1~ |
+| x  | y  | Δy  |
+| -- | -- | --- |
+| x0 | y0 | Δy0 |
+| x1 | y1 | Δy1 |
 
 ## Usage
 
