@@ -6,7 +6,6 @@
 *.lo
 *.o
 *.obj
-bin/
 
 # Precompiled Headers
 *.gch
@@ -31,6 +30,7 @@ bin/
 *.exe
 *.out
 *.app
+bin/*
 
 # Products
 *.csv
