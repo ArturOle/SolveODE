@@ -25,13 +25,11 @@ std::vector<double> ODE::solve_euler()
 		table[i][3] = h*table[i][2];
 
 
-		for (int j =0; j < table[i].size(); j++)
+		for (int j = 0; j < table[i].size(); j++)
 			std::cout << table[i][j] << ";"; 
-		
 		
 		i++;
 		std::cout << std::endl;
-
 	}
 }
 
@@ -39,24 +37,25 @@ std::vector<double> ODE::solve_runge_kutta()
 {
 	int i = 0;
 	double x;
-
-
 	
-	for(x = 0; x <= parameters[4]; x += h)
+	for(x = 0.0; x <= parameters[4]; x += h)
 	{
 		table.push_back({0, 0, 0, 0});
 		table[i][0] = x;
-
+		table[i][2] = rk_delta_y(i); 
 
 		if (i)
 		{
-			table[i][1] = table[i-1][1] + rk_delta_y(i); 
+			table[i][1] = table[i-1][1] + table[i-1][2];
+			// y_i      = y_{i-1}       + delta y_{i-1}
 		}
 
-	i++
+		for (int j = 0; j < table[i].size(); j++)
+			std::cout << table[i][j] << ";"; 
+
+		i++;
+		std::cout << std::endl;
 	}
-
-
 }
 
 double ODE::rk_delta_y(int i)
@@ -68,10 +67,10 @@ double ODE::rk_delta_y(int i)
 	k_values[2] = this->h * rk_function(table[i][0] + h * 0.5, table[i][1] + k_values[1] * 0.5);
 	k_values[3] = this->h * rk_function(table[i][0] + h, table[i][1] + k_values[2]);
 	
-	for (int j =0; j < k_values.size(); j++)
-	{
-		std::cout << k_values[j] << ";";
-	}
+	// for (int j =0; j < k_values.size(); j++)
+	// {
+	// 	std::cout << k_values[j] << ";";
+	// }
 	
 	return (k_values[0] + 2*k_values[1] + 2* k_values[2] + k_values[3])/6;
 }
